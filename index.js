@@ -9,10 +9,16 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-console.log('Welcome to Command-tac-toe!');
-console.log(`Current player: ${game.getCurrPlayer()}`);
+const handlePrompt = (input) => {
+  const castInput = Number(input);
+  if (Number.isNaN(castInput) || castInput < 1 || castInput > 9) {
+    rl.question('Invalid input. Please enter position between 1 and 9: ', handlePrompt);
+  }
+};
 
-rl.question('Enter position: ', (answer) => {
-  console.log(`Oh, so your favorite food is ${answer}`);
-});
+
+console.log('Welcome to Command-tac-toe!');
+console.log(game.stringifyBoard());
+console.log(`Current player: ${game.getCurrPlayer()}`);
+rl.question('Enter position: ', handlePrompt);
 
