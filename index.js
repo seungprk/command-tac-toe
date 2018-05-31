@@ -13,7 +13,17 @@ const handlePrompt = (input) => {
   const castInput = Number(input);
   if (Number.isNaN(castInput) || castInput < 1 || castInput > 9) {
     rl.question('Invalid input. Please enter position between 1 and 9: ', handlePrompt);
+    return;
   }
+  if (game.isFilled(castInput)) {
+    rl.question('Position occupied. Please enter a different position: ', handlePrompt);
+    return;
+  }
+
+  game.fill(castInput);
+  console.log(game.stringifyBoard());
+  console.log(`Current player: ${game.getCurrPlayer()}`);
+  rl.question('Enter position: ', handlePrompt);
 };
 
 

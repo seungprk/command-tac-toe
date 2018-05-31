@@ -22,6 +22,15 @@ class Game {
 
     return str;
   }
+
+  isFilled(pos) {
+    return this.board[pos - 1] === 'x' || this.board[pos - 1] === 'o';
+  }
+
+  fill(pos) {
+    this.board[pos - 1] = this.currPlayer;
+    this.currPlayer = this.currPlayer === 'x' ? 'o' : 'x';
+  }
 }
 
 module.exports = Game;
